@@ -50,8 +50,8 @@ read_data <- function(geno.file, kinship.file, ploidy, sex=NULL,
   dimnames(coeff) <- list(id,markers)
   coeff[which(is.na(coeff))] <- 0
   
-  K <- as.matrix(read.csv(kinship.file,row.names=1,check.names=F))
-  colnames(K) <- rownames(K)
+  K <- as.matrix(fread(kinship.file,check.names=F,data.table=F))
+  rownames(K) <- colnames(K)
   stopifnot(id %in% colnames(K))
   K <- K[id,id]
 
